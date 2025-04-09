@@ -16,7 +16,7 @@ The task was divided into four key stages:
   - Navigated the page and parsed HTML with `BeautifulSoup`.
   - Enabled headless PDF downloads with Chrome DevTools Protocol.
   - Saved metadata: document title, download URL, page numbers.
-  - Initially, using a real Chrome user profile was also considered to improve bypass reliability. However, this approach was not chosen in order to maintain transparency and reproducibility of the solution for demonstration purposes.
+  - Using a real Chrome user profile was initially considered to improve the reliability of bypassing Cloudflare. However, this approach was not chosen to ensure the solution remains transparent and fully reproducible for demonstration purposes.
 
 
 ---
@@ -66,6 +66,20 @@ The task was divided into four key stages:
 
 ---
 
+### 📁 Project Structure
+
+This repository is organized into modular components to ensure clarity, reusability, and easy evaluation of the RAG pipeline:
+
+- `cardiology_agent.py` – Contains the DSPy-based agent responsible for generating accurate, grounded answers based on retrieved context. Includes prompt signature and answer generation logic.
+
+- `metric_collector.py` – Implements a convenient class for collecting evaluation metrics and managing test cases. Supports Faithfulness, Source Attachment, Answer Relevancy, and contextual metrics via DeepEval.
+
+- `qdrant_retriever.py` – Custom retriever that interfaces with Qdrant. It performs vector search and returns the most relevant document chunks with associated metadata.
+
+- `InvolveTestTask.ipynb` – Main notebook demonstrating the full workflow: scraping PDFs, creating embeddings, indexing documents in Qdrant, retrieving relevant content, generating answers, and evaluating results. It ties together components from the above modules into a complete pipeline.
+
+---
+
 ## 🚀 How to Run the Project
 
 ### 1. Clone the Repository
@@ -86,13 +100,14 @@ OPENAI_API_KEY=sk-...
 QDRANT_URL=http://localhost:6333
 ```
 
-### 4. Start Qdrant in Docker
+### 3. Start Qdrant in Docker
 ```bash
 docker run -p 6333:6333 \
   -v $(pwd)/qdrant_storage:/qdrant/storage \
   qdrant/qdrant
 ```
 
+#### 4. Run the Notebook
 ```bash
 jupyter notebook InvolveTestTask.ipynb
 ```
@@ -106,6 +121,8 @@ Follow each step in the notebook to:
 
 4. Evaluate the quality of responses.
 
+---
+
 ### ⚠️ CAPTCHA Notice
 
 When running the notebook, especially during the **PDF scraping step**, you will see a **browser window open via `undetected-chromedriver`**.
@@ -118,8 +135,10 @@ If Cloudflare presents a **CAPTCHA**, you'll need to **solve it manually in the 
 
 ❗ You might need to solve the CAPTCHA **more than once**, depending on the website's security behavior.
 
+---
 
 ## 👤 Author
-Submitted by: Artem Sydorenko
-For: Involve – Technical Test Task
-[kradworkmail@gmail.com]
+
+**Name:** Artem Sydorenko  
+**Email:** [kradworkmail@gmail.com](mailto:kradworkmail@gmail.com)  
+**Submitted for:** Involve – Technical Test Task.
