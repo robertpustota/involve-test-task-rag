@@ -1,6 +1,5 @@
 import openai
 from qdrant_client import QdrantClient
-from typing import List, Dict
 
 
 class QdrantRetriever:
@@ -32,7 +31,7 @@ class QdrantRetriever:
         embedding = response.data[0].embedding
         return embedding    
 
-    def search_medical_guidelines(self, query: str) -> List[Dict]:
+    def search_medical_guidelines(self, query: str) -> list[dict]:
         """
         Perform a search in Qdrant using embedding and optional metadata filters.
 

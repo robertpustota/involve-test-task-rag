@@ -64,7 +64,6 @@ lib/vis-9.1.2/vis-network.min.js
 lib/
 mlruns/
 
-downloads/
 .ipynb_checkpoints/
 
 test_agent.py
